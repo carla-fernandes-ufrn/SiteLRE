@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LRE - UFRN</title>
+  <link rel="icon" href="favicon.ico">
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body x-data="{ page: 'home', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }"
+  x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMode'));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+  :class="{'b eh': darkMode === true}">
+  <!-- ===== Header Start ===== -->
+  <header class="g s r vd ya cj" :class="{ 'hh sm _k dj bl ll' : stickyMenu }"
+    @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
+    <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
+      <div class="vd to/4 tc wf yf">
+        <a href="index.html">
+          <img class="om" src="images/LogoL.png" alt="Logo Light" style="width: 100px;"/>
+          <img class="xc nm" src="images/LogoL.png" alt="Logo Dark" style="width: 100px;"/>
+        </a>
+
+        <!-- Hamburger Toggle BTN -->
+        <button class="po rc" @click="navigationOpen = !navigationOpen">
+          <span class="rc i pf re pd">
+            <span class="du-block h q vd yc">
+              <span class="rc i r s eh um tg te rd eb ml jl dl" :class="{ 'ue el': !navigationOpen }"></span>
+              <span class="rc i r s eh um tg te rd eb ml jl fl" :class="{ 'ue qr': !navigationOpen }"></span>
+              <span class="rc i r s eh um tg te rd eb ml jl gl" :class="{ 'ue hl': !navigationOpen }"></span>
+            </span>
+            <span class="du-block h q vd yc lf">
+              <span class="rc eh um tg ml jl el h na r ve yc" :class="{ 'sd dl': !navigationOpen }"></span>
+              <span class="rc eh um tg ml jl qr h s pa vd rd" :class="{ 'sd rr': !navigationOpen }"></span>
+            </span>
+          </span>
+        </button>
+        <!-- Hamburger Toggle BTN -->
+      </div>
+
+      <div class="vd wo/4 sd qo f ho oo wf yf" :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen }">
+        <nav>
+          <ul class="tc _o sf yo cg ep">
+            <li><a href="index.html" class="xl" :class="{ 'mk': page === 'home' }">Início</a></li>
+            <li><a href="index.html#sobre" class="xl">Sobre</a></li>
+            <li><a href="index.html#cursos" class="xl">Cursos</a></li>
+            <li><a href="index.html#projetos" class="xl">Projetos</a></li>
+            <li><a href="index.html#equipe" class="xl">Equipe</a></li>
+            <li><a href="index.html#publicacoes" class="xl">Publicações</a></li>
+            <li><a href="index.html#contato" class="xl">Contato</a></li>
+          </ul>
+        </nav>
+
+        <div class="tc wf ig pb no">
+          <div class="pc h io pa ra" :class="navigationOpen ? '!-ud-visible' : 'd'">
+            <label class="rc ab i">
+              <input type="checkbox" :value="darkMode" @change="darkMode = !darkMode" class="pf vd yc uk h r za ab" />
+              <!-- Icon Sun -->
+              <svg :class="{ 'wn' : page === 'home', 'xh' : page === 'home' && stickyMenu }" class="th om" width="25"
+                height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M12.0908 18.6363C10.3549 18.6363 8.69 17.9467 7.46249 16.7192C6.23497 15.4916 5.54537 13.8268 5.54537 12.0908C5.54537 10.3549 6.23497 8.69 7.46249 7.46249C8.69 6.23497 10.3549 5.54537 12.0908 5.54537C13.8268 5.54537 15.4916 6.23497 16.7192 7.46249C17.9467 8.69 18.6363 10.3549 18.6363 12.0908C18.6363 13.8268 17.9467 15.4916 16.7192 16.7192C15.4916 17.9467 13.8268 18.6363 12.0908 18.6363ZM12.0908 16.4545C13.2481 16.4545 14.358 15.9947 15.1764 15.1764C15.9947 14.358 16.4545 13.2481 16.4545 12.0908C16.4545 10.9335 15.9947 9.8236 15.1764 9.00526C14.358 8.18692 13.2481 7.72718 12.0908 7.72718C10.9335 7.72718 9.8236 8.18692 9.00526 9.00526C8.18692 9.8236 7.72718 10.9335 7.72718 12.0908C7.72718 13.2481 8.18692 14.358 9.00526 15.1764C9.8236 15.9947 10.9335 16.4545 12.0908 16.4545ZM10.9999 0.0908203H13.1817V3.36355H10.9999V0.0908203ZM10.9999 20.8181H13.1817V24.0908H10.9999V20.8181ZM2.83446 4.377L4.377 2.83446L6.69082 5.14828L5.14828 6.69082L2.83446 4.37809V4.377ZM17.4908 19.0334L19.0334 17.4908L21.3472 19.8046L19.8046 21.3472L17.4908 19.0334ZM19.8046 2.83337L21.3472 4.377L19.0334 6.69082L17.4908 5.14828L19.8046 2.83446V2.83337ZM5.14828 17.4908L6.69082 19.0334L4.377 21.3472L2.83446 19.8046L5.14828 17.4908ZM24.0908 10.9999V13.1817H20.8181V10.9999H24.0908ZM3.36355 10.9999V13.1817H0.0908203V10.9999H3.36355Z"
+                  fill="" />
+              </svg>
+              <!-- Icon Sun -->
+              <img class="xc nm" src="images/icon-moon.svg" alt="Moon" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== Header End ===== -->
+
+  <main>
+    <!-- ===== Hero Start ===== -->
+    <section class="gj do ir hj sp jr i pg">
+      <!-- Hero Images -->
+      <div class="xc fn zd/2 2xl:ud-w-187.5 bd 2xl:ud-h-171.5 h q r">
+        <img src="images/shape-01.svg" alt="shape" class="xc 2xl:ud-block h t -ud-left-[10%] ua" />
+        <img src="images/shape-02.svg" alt="shape" class="xc 2xl:ud-block h u p va" />
+        <img src="images/shape-03.svg" alt="shape" class="xc 2xl:ud-block h v w va" />
+        <!-- <img src="images/shape-04.svg" alt="shape" class="h q r" /> -->
+      </div>
+
+      <!-- Hero Content -->
+      <div class="bb ze ki xn 2xl:ud-px-0">
+        <div class="tc _o">
+          <div class="jn/2">
+            <h1 class="fk vj zp or kk wm wb">Formando futuros inovadores por meio da Robótica Educacional.</h1>
+            <p class="fq">
+              Atuamos na formação de professores, no desenvolvimento de soluções tecnológicas e na pesquisa em robótica 
+              educacional, unindo ensino, inovação e impacto social para transformar a forma como aprendemos e 
+              ensinamos tecnologia.
+            </p>
+
+            <div class="tc tf yo zf mb">
+              <a href="index.html#projetos" class="ek jk lk gh gi hi rg ml il vc _d _l">Conheça nossos projetos</a>
+
+              <span class="tc sf">
+                <span class="inline-block ek xj kk wm"> Quer saber mais? </span>
+                <a href="index.html#contato" class="inline-block">Entre em contato conosco.</a>
+              </span>
+            </div>
+          </div>
+          <img 
+            src="images/Projetos/lab.jpg" 
+            alt="About" 
+            class="hero-lab-image"
+          />
+
+        </div>
+      </div>
+    </section>
+    <!-- ===== Hero End ===== -->
+
+    <!-- ===== Small Features Start ===== -->
+    <section>
+      <div class="bb ze ki yn 2xl:ud-px-12.5">
+        <div class="tc uf zo xf ap zf bp mq">
+          <!-- Small Features Item -->
+          <div class="kn to/3 tc cg oq">
+            <div class="tc wf xf cf ae cd rg mh">
+              <img src="images/icon-03.svg" alt="Icon" />
+            </div>
+            <div>
+              <h4 class="ek yj go kk wm xb">Formação de Professores</h4>
+              <p>Oficinas, cursos e materiais de apoio para docentes que querem levar robótica e programação para suas turmas.</p>
+            </div>
+          </div>
+
+          <!-- Small Features Item -->
+          <div class="kn to/3 tc cg oq">
+            <div class="tc wf xf cf ae cd rg nh">
+              <img src="images/icon-01.svg" alt="Icon" />
+            </div>
+            <div>
+              <h4 class="ek yj go kk wm xb">Projetos com Escolas</h4>
+              <p>Parcerias com escolas públicas para desenvolver atividades de robótica alinhadas ao currículo.</p>
+            </div>
+          </div>
+
+          <!-- Small Features Item -->
+          <div class="kn to/3 tc cg oq">
+            <div class="tc wf xf cf ae cd rg oh">
+              <img src="images/icon-02.svg" alt="Icon" />
+            </div>
+            <div>
+              <h4 class="ek yj go kk wm xb">Pesquisa e Inovação</h4>
+              <p>Investigamos metodologias, recursos e tecnologias em robótica educacional para tornar o ensino mais criativo e acessível.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Small Features End ===== -->
+
+    <!-- ===== About Start ===== -->
+    <section class="ji gp uq 2xl:ud-py-35 pg" id="sobre">
+      <div class="bb ze ki xn wq">
+        <div class="tc wf gg qq">
+          <!-- About Images -->
+          <div class="xc gn gg jn/2 i">
+            <div>
+              <img src="images/shape-05.svg" alt="Shape" class="h -ud-left-5 x" />
+              <img src="images/Projetos/img1.png" alt="About" class="ib" />
+              <img src="images/Projetos/img2.png" alt="About" />
+            </div>
+            <div>
+              <img src="images/shape-06.svg" alt="Shape" />
+              <img src="images/Projetos/img3.png" alt="About" class="ob gb" />
+              <img src="images/shape-07.svg" alt="Shape" class="bb" />
+            </div>
+          </div>
+
+          <!-- About Content -->
+          <div class="jn/2">
+            <h4 class="ek yj mk gb">Sobre</h4>
+            <h2 class="fk vj zp pr kk wm qb">Robótica Educacional: Inovação que Transforma</h2>
+            <p class="uo">O Laboratório de Robótica Educacional (LRE) integra o Grupo NatalNet da UFRN e atua com robótica educacional desde 2006. Somos um espaço dedicado à formação de professores, ao desenvolvimento de soluções tecnológicas e à pesquisa sobre metodologias inovadoras para o ensino de ciência e tecnologia.
+
+Criado para aproximar escolas, estudantes e educadores da prática da robótica, o LRE fortalece ações de ensino, pesquisa e extensão, contribuindo para a inovação educacional no Rio Grande do Norte.
+
+Nosso trabalho é guiado por valores como colaboração, inclusão, criatividade e impacto social. O laboratório recebe alunos da UFRN, professores da rede básica e escolas parceiras interessadas em levar tecnologia para suas comunidades.</p>
+
+            <a href="https://www.youtube.com/@natalnet/videos" data-fslightbox class="vc wf hg mb">
+              <span class="tc wf xf be dd rg i gh ua">
+                <span class="nf h vc yc vd rg gh qk -ud-z-1"></span>
+                <img src="images/icon-play.svg" alt="Play" />
+              </span>
+              <a href="https://www.youtube.com/@natalnet/videos" class="kk"> VISITE NOSSO CANAL DO YOUTUBE</a>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== About End ===== -->
+
+    <!-- ===== Cursos Start ===== -->
+    <section class="i pg fh rm ji gp uq" id="cursos">
+      <!-- Bg Shapes -->
+      <img src="images/shape-06.svg" alt="Shape" class="h aa y" />
+      <img src="images/shape-03.svg" alt="Shape" class="h ca u" />
+      <img src="images/shape-07.svg" alt="Shape" class="h w da ee" />
+      <img src="images/shape-12.svg" alt="Shape" class="h p s" />
+      <img src="images/shape-13.svg" alt="Shape" class="h r q" />
+      
+      <!-- Section Title Start -->
+      <div
+        x-data="{ sectionTitle: `Cursos`, sectionTitleText: `Oficinas, capacitações e experiências práticas que aproximam você do universo da robótica e da programação.`}">
+        <div class="bb ze rj ki xn vq">
+          <h2 x-text="sectionTitle" class="fk vj pr kk wm on/5 gq/2 bb _b">
+          </h2>
+          <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+        </div>
+
+
+      </div>
+      <!-- Section Title End -->
+
+      <div class="bb ze ki xn yq mb en">
+        <div class="wc qf pn xo3 ng">
+          <!-- Service Item -->
+          <div class="sg oi pi zq ml il am cn _m">
+            <img src="images/icon-06.svg" alt="Icon" />
+            <h4 class="ek zj kk wm nb _b">Formação de Professores em Robótica Educacional</h4>
+            <p>Capacitação prática para educadores que desejam implementar atividades de robótica e programação em sala de aula.</p>
+            <br>
+            <span><strong>Duração do curso:</strong> 60 horas</span>
+          </div>
+
+          <!-- Service Item -->
+          <div class="sg oi pi zq ml il am cn _m">
+            <img src="images/icon-07.svg" alt="Icon" />
+            <h4 class="ek zj kk wm nb _b">Formação de Professores para a OBR</h4>
+            <p>Capacitação voltada a docentes que desejam preparar suas equipes para a Olimpíada Brasileira de Robótica, com foco em regras, estratégias e práticas de treinamento.</p>
+            <br>
+            <span><strong>Duração do curso:</strong> 60 horas</span>
+          </div>
+
+          <!-- Service Item -->
+          <div class="sg oi pi zq ml il am cn _m">
+            <img src="images/icon-05.svg" alt="Icon" />
+            <h4 class="ek zj kk wm nb _b">Introdução ao Arduino</h4>
+            <p>Curso prático para aprender eletrônica básica, programação e desenvolvimento de projetos com a plataforma Arduino.</p>
+            <br>
+            <span><strong>Duração do curso:</strong> 15 horas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Cursos End ===== -->
+
+    <!-- ===== Projeto Start ===== -->
+    <section x-data="{filterTab: 1}" class="pg pj vp mr oj wp nr" id="projetos">
+      
+      <!-- Section Title Start -->
+      <div
+        x-data="{ sectionTitle: `Nossos Projetos`, sectionTitleText: `Desenvolvemos ações de ensino, pesquisa e extensão que promovem inovação e aprendizagem criativa por meio da robótica educacional.`}">
+        <div class="bb ze rj ki xn vq">
+          <h2 x-text="sectionTitle" class="fk vj pr kk wm on/5 gq/2 bb _b">
+          </h2>
+          <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+        </div>
+
+
+      </div>
+
+      <div class="bb ze ki xn 2xl:ud-px-0 jb" x-data="{filterTab: 1}">
+        <!-- Porject Tab -->
+        <div class="projects-tab _e bb tc uf wf xf cg rg hh rm vk xm si ti fc">
+          <button data-filter="*" @click="filterTab = 1" :class="{ 'gh lk' : filterTab === 1 }"
+            class="project-tab-btn ek rg ml il vi mi">
+            Todos
+          </button>
+          <button data-filter=".branding" @click="filterTab = 2" :class="{ 'gh lk' : filterTab === 2 }"
+            class="project-tab-btn ek rg ml il vi mi">
+            Pesquisa
+          </button>
+          <button data-filter=".digital" @click="filterTab = 3" :class="{ 'gh lk' : filterTab === 3 }"
+            class="project-tab-btn ek rg ml il vi mi">
+            Extensão
+          </button>
+        </div>
+
+        <!-- Projects item wrapper -->
+        <div class="projects-wrapper tc -ud-mx-5">
+          <div class="project-sizer"></div>
+          <!-- Project Item -->
+          <div class="project-item wi fb vd jn/2 to/3 branding ecommerce">
+            <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Desvelando a Robótica Educacional</h2>
+            <p>
+              Projeto de pesquisa interinstitucional dedicado à Robótica Educacional, com foco no desenvolvimento de metodologias, softwares, hardwares e currículos para formação docente e aprendizagem na educação básica. A iniciativa investiga políticas públicas e práticas pedagógicas, além de realizar intervenções em instituições de ensino. O projeto produz tecnologias e modelos formativos para ampliar o uso da robótica como metodologia ativa de ensino.
+            </p>
+          </div>
+
+          <!-- Project Item -->
+          <div class="project-item wi fb vd jn/2 to/3 digital">
+              <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Inclusão Digital usando Robótica Educacional</h2>
+              <p>
+                Projeto voltado à formação continuada de professores da rede pública de Natal para uso pedagógico da robótica, com programação e controle de robôs. Oficinas com kits já existentes permitem aplicar a robótica a alunos do Ensino Fundamental, fortalecendo o ensino e ampliando o modelo para outras escolas do RN.
+              </p>
+          </div>
+
+          <!-- Project Item -->
+          <div class="project-item wi fb vd jn/2 to/3 digital ecommerce">
+              <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Olimpíada Brasileira de Robótica</h2>
+              <p>
+                O projeto deu início à então intitulada Olimpíada Brasileira de Robótica (OBR), que incentiva estudantes do Ensino Fundamental e Médio a ingressar nas áreas tecnológicas por meio de desafios teóricos e práticos em robótica, realizados dentro de uma competição de nível nacional.
+              </p>
+          </div>
+
+          <!-- Project Item -->
+          <div class="project-item wi fb vd vo/3 branding ecommerce">
+              <h2 class="ek vj 2xl:ud-text-title-lg kk wm nb qb">Metodologias de Software e Hardware para Robótica Educacional</h2>
+              <p>
+                Projeto voltado ao desenvolvimento e teste de ferramentas de programação e controle de robôs, com foco em crianças dos anos iniciais e priorização de hardware de baixo custo. A proposta buscou ampliar o acesso à robótica como recurso de inclusão digital. Destaca-se por incentivar o interesse tecnológico desde a escola básica, contribuindo para futuras carreiras na área.
+              </p>
+          </div>
+        </div>
+      </div>
+      <!-- Section Title End -->
+
+    </section>
+
+    <!-- ===== Cursos Start ===== -->
+    <section class="i pg fh rm ji gp uq" id="equipe">
+      <!-- Bg Shapes -->
+      <img src="images/shape-08.svg" alt="Shape Bg" class="h q r" />
+      <img src="images/shape-09.svg" alt="Shape" class="of h y z/2" />
+      <!-- <img src="images/shape-10.svg" alt="Shape" class="h _ aa" /> -->
+      <img src="images/shape-11.svg" alt="Shape" class="of h m ba" />
+      
+      <!-- Section Title Start -->
+      <div
+        x-data="{ sectionTitle: `Equipe`, sectionTitleText: `Nossa equipe é formada por professores, pesquisadores, bolsistas e colaboradores dedicados a promover educação tecnológica de qualidade através da robótica.`}">
+        <div class="bb ze rj ki xn vq">
+          <h2 x-text="sectionTitle" class="fk vj pr kk wm on/5 gq/2 bb _b">
+          </h2>
+          <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+        </div>
+
+
+      </div>
+      <!-- Section Title End -->
+
+      <div class="bb ze i va ki xn xq jb jo">
+        <div class="wc qf pn xo5 gg cp">
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/LM.jpeg" alt="Team" />
+            </div>
+
+            <h6 class="yj kk wm ob zb">Prof. Dr. Luiz Marcos Gonçalves</h6>
+            <p>Professor do Departamento de Engenharia de Computação/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Carla.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Profa. Dra. Carla Fernandes</h4>
+            <p>Professora da Escola Agrícola de Jundiaí/UFRN</p>
+            <a href="http://lattes.cnpq.br/2329425562585943"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Guia.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Maria Guia Torres</h4>
+            <p>Aluna de Doutorado do PPgEEC/UFRN</p>
+            <a href="http://lattes.cnpq.br/3031861288487751"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Lídia.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Lídia Gabrielly Dutra</h4>
+            <p>Aluna de Mestrado do PPgEEC/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Lindenberg.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Jose Lindenberg de Andrade</h4>
+            <p>Aluno de Mestrado do PPgEEC/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+        </div>
+        <div class="wc qf pn xo5 gg cp">
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Larissa.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Larissa Soares de Souza</h4>
+            <p>Aluna de Mestrado do PPgEEC/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Igor.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Igor Matias de Lima Dantas</h4>
+            <p>Aluno de Mestrado do PPgEEC/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Guilherme.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Guilherme Félix Brandt</h4>
+            <p>Aluno de Mestrado do PPgEEC/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+
+          <!-- Team Item -->
+          <div class="rj">
+            <div class="c i pg z-1">
+              <img class="vd-img" src="images/Equipe/Gabriel.jpeg" alt="Team" />
+            </div>
+
+            <h4 class="yj kk wm ob zb">Gabriel Arthur Oliveira</h4>
+            <p>Aluno de Iniciação Científica/UFRN</p>
+            <a href="http://lattes.cnpq.br/1562357566810393"><strong>Lattes</strong></a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Cursos End ===== -->
+
+    <!-- ===== Publicações Start ===== -->
+    <section class="i pg fh rm ji gp uq" id="publicacoes">
+      <!-- Section Title Start -->
+      <div
+        x-data="{ sectionTitle: `Publicações 2025`}">
+        <div class="bb ze rj ki xn vq">
+          <h2 x-text="sectionTitle" class="fk vj pr kk wm on/5 gq/2 bb _b">
+          </h2>
+          <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+        </div>
+
+
+      </div>
+      <!-- Section Title End -->
+
+      <div class="bb ze ki xn ar">
+        <div class="jb cq">
+          <!-- Slider main container -->
+          <div class="swiper testimonial-01">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <div class="i hh rm sg vk xm bi qj">
+                  <!-- Border Shape -->
+                  <span class="rc je md/2 gh xg h q r"></span>
+                  <span class="rc je md/2 mh yg h q p"></span>
+
+                  <div class="tc sf rn tn un zf dp">
+                    <div>
+                      <p class="ek ik xj _p kc fb">
+                        Educational robotics as a pedagogical resource for K-12 students with learning difficulties
+                      </p>
+
+                      <div class="tc yf vf">
+                        <div>
+                          <span class="rc ek xj kk wm zb">DA SILVA, MARIA DA GUIA TORRES ; ARAÚJO MAIA, CLAUDIA JULIETE DO NASCIMENTO ; FERNANDES CURVELO, CARLA DA COSTA ; GARCIA, Luciane Terra dos Santos ; GONÇALVES, LUIZ MARCOS GARCIA </span>
+                          <span class="rc">Scientific Reports, v. 15, p. 35923, 2025.</span>
+                        <br>
+                        <p>Evidencia o uso da robótica educacional como suporte pedagógico a estudantes com dificuldades de aprendizagem, apresentando resultados de inclusão e desenvolvimento cognitivo.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="i hh rm sg vk xm bi qj">
+                  <!-- Border Shape -->
+                  <span class="rc je md/2 gh xg h q r"></span>
+                  <span class="rc je md/2 mh yg h q p"></span>
+
+                  <div class="tc sf rn tn un zf dp">
+                    <div>
+                      <p class="ek ik xj _p kc fb">
+                        Educational Robotics and Social Issues: A Pedagogical Proposal with Educational Robotics to Awareness of the #FaçaBonito Campaign
+                      </p>
+
+                      <div class="tc yf vf">
+                        <div>
+                          <span class="rc ek xj kk wm zb">DE SOUZA, LARISSA SOARES ; ARAUJO MAIA, CLAUDIA JULIETTE DO NASCIMENTO ; SANTANA-JÚNIOR, ORIVALDO VIEIRA ; TEIXEIRA, LEONARDO R. L. ; DOS SANTOS GARCIA, LUCIANE TERRA ; GONÇALVES, LUIZ MARCOS GARCIA.</span>
+                          <span class="rc">Brazilian Conference on Robotics (CROS), 2025, Belo Horizonte. 2025 Brazilian Conference on Robotics (CROS). Los Alamitos, CA: IEEE, 2025. v. 1. p. 1-6.
+</span>
+                          <br>
+                          <p>Uso da robótica educacional para discutir temas sociais e proteção infantil, integrando tecnologia com formação cidadã.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- If we need navigation -->
+            <div class="tc wf xf fg jb">
+              <div class="swiper-button-prev c tc wf xf ie ld rg _g dh pf ml vr hh rm tl zm rl ym">
+                <svg class="th lm" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M3.52366 7.83336L7.99366 12.3034L6.81533 13.4817L0.333663 7.00002L6.81533 0.518357L7.99366 1.69669L3.52366 6.16669L13.667 6.16669L13.667 7.83336L3.52366 7.83336Z"
+                    fill="" />
+                </svg>
+              </div>
+              <div class="swiper-button-next c tc wf xf ie ld rg _g dh pf ml vr hh rm tl zm rl ym">
+                <svg class="th lm" width="14" height="14" viewBox="0 0 14 14" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.4763 6.16664L6.00634 1.69664L7.18467 0.518311L13.6663 6.99998L7.18467 13.4816L6.00634 12.3033L10.4763 7.83331H0.333008V6.16664H10.4763Z"
+                    fill="" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ===== Testimonials End ===== -->
+
+    <!-- ===== Counter Start ===== -->
+    <section class="i pg qh rm ji hp" id="contato">
+      <img src="images/shape-11.svg" alt="Shape" class="of h ga ha ke" />
+      <img src="images/shape-07.svg" alt="Shape" class="h ia o ae jf" />
+      <img src="images/shape-14.svg" alt="Shape" class="h ja ka" />
+      <img src="images/shape-15.svg" alt="Shape" class="h q p" />
+
+      <!-- Section Title Start -->
+      <div
+        x-data="{ sectionTitle: `Contato`}">
+        <div class="bb ze rj ki xn vq">
+          <h2 x-text="sectionTitle" class="fk vj pr kk wm on/5 gq/2 bb _b">
+          </h2>
+          <p class="bb on/5 wo/5 hq" x-text="sectionTitleText"></p>
+        </div>
+
+
+      </div>
+      <!-- Section Title End -->
+
+      <div class="i va bb ye ki xn wq jb mo">
+        <div class="">
+          <div class="w-full sg hh sm yh rq i pg">
+            <!-- Bg Shapes -->
+            <img src="images/shape-03.svg" alt="Shape" class="h la x wd" />
+            <img src="images/shape-06.svg" alt="Shape" class="h la ma ne kf" />
+
+            <div class="fb">
+              <h4 class="wj kk wm cc">Email Address</h4>
+              <p>carla.fernandes@ufrn.br</p>
+            </div>
+            <div class="fb">
+              <h4 class="wj kk wm cc">Localização</h4>
+              <p>Departamento de Engenharia de Computação - Av. Sen. Salgado Filho, 3000 - Lagoa Nova, Natal - RN</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA End ===== -->
+  </main>
+  <!-- ===== Footer Start ===== -->
+  <footer>
+    <div class="bb ze ki xn 2xl:ud-px-0">
+      <!-- Footer Top -->
+      
+
+      <!-- Footer Bottom -->
+      <div class="bh ch pm tc uf sf yo wf xf ap cg fp bj">
+
+        <div class="">
+          <p>Grupo de Laboratórios NatalNet</p>
+        </div>
+      </div>
+      <!-- Footer Bottom -->
+    </div>
+  </footer>
+
+  <!-- ===== Footer End ===== -->
+
+  <!-- ====== Back To Top Start ===== -->
+  <button class="xc wf xf ie ld vg sr gh tr g sa ta _a" @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+    @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'uc' : scrollTop }">
+    <svg class="uh se qd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <path
+        d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
+    </svg>
+  </button>
+
+  <!-- ====== Back To Top End ===== -->
+
+  <script>
+    //  Pricing Table
+    const setup = () => {
+      return {
+        isNavOpen: false,
+
+        billPlan: 'monthly',
+
+        plans: [
+          {
+            name: 'Starter',
+            price: {
+              monthly: 29,
+              annually: 29 * 12 - 199,
+            },
+            features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
+          },
+          {
+            name: 'Growth Plan',
+            price: {
+              monthly: 59,
+              annually: 59 * 12 - 100,
+            },
+            features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
+          },
+          {
+            name: 'Business',
+            price: {
+              monthly: 139,
+              annually: 139 * 12 - 100,
+            },
+            features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
+          },
+        ],
+      };
+    };
+  </script>
+  <script defer src="bundle.js"></script>
+</body>
+
+</html>
+
+<style>
+  .hero-lab-image {
+    display: none;           /* padrão: some em telas pequenas */
+    border-radius: 12px;     /* Bordas arredondadas */
+  }
+
+  @media (min-width: 768px) {
+    .hero-lab-image {
+      display: block;        /* aparece a partir de 768px */
+      width: 50vw;           /* metade da largura da tela */
+      height: auto;          /* mantém proporção */
+      object-fit: cover;     /* garante visual bonito sem distorcer */
+      border-radius: 12px;     /* Bordas arredondadas */
+    }
+  }
+</style>
